@@ -1,4 +1,4 @@
-import express, { Request } from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import { PersonType } from './types';
@@ -35,22 +35,22 @@ let persons: PersonType[] = [
   },
 ];
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
   res.send('<h1>Hello World!</h1>');
 });
 
-app.get('/info', (req, res) => {
+app.get('/info', (req: Request, res: Response) => {
   const { length } = persons;
   const date = new Date();
 
   res.send(`<p>Phonebook has info for ${length} people</p><p>${date}</p>`);
 });
 
-app.get('/api/persons', (req, res) => {
+app.get('/api/persons', (req: Request, res: Response) => {
   res.json(persons);
 });
 
-app.get('/api/persons/:id', (req, res) => {
+app.get('/api/persons/:id', (req: Request, res: Response) => {
   const { id } = req.params;
   const person = persons.find((p) => p.id === id);
 
@@ -58,7 +58,7 @@ app.get('/api/persons/:id', (req, res) => {
   else res.status(404).send('Person could not be found');
 });
 
-app.delete('/api/persons/:id', (req, res) => {
+app.delete('/api/persons/:id', (req: Request, res: Response) => {
   const { id } = req.params;
   persons = persons.filter((person) => person.id !== id);
 
@@ -71,7 +71,7 @@ const generateId = () => {
   return String(maxId + 1);
 };
 
-app.post('/api/persons', (req, res) => {
+app.post('/api/persons', (req: Request, res: Response) => {
   const body = req.body;
 
   if (!body.name || !body.number) {
