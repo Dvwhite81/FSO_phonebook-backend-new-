@@ -1,0 +1,1 @@
+*{box-sizing:border-box;margin:0;padding:0}body{padding:0 1rem}h1,h2,h3,h4,h5,h6{margin:1rem 0}ul{list-style-type:none}.notification{background:#d3d3d3;font-size:20px;border-style:solid;border-radius:5px;padding:10px;margin-bottom:10px;position:absolute;left:50%;transform:translate(-50%);top:1rem}.success{color:green}.error{color:red}

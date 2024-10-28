@@ -1,10 +1,14 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
+import { config } from 'dotenv';
+config();
 import { PersonType } from './types';
 
 const app = express();
 app.use(express.json());
+app.use(express.static('dist'));
+
 app.use(cors());
 
 morgan.token('body', (req: Request) => JSON.stringify(req.body));
@@ -102,7 +106,7 @@ app.post('/api/persons', (req: Request, res: Response) => {
   res.json(person);
 });
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log('Server listening on port', PORT);
 });

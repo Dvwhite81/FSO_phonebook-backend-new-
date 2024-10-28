@@ -6,8 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const morgan_1 = __importDefault(require("morgan"));
+const dotenv_1 = require("dotenv");
+(0, dotenv_1.config)();
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
+app.use(express_1.default.static('dist'));
 app.use((0, cors_1.default)());
 morgan_1.default.token('body', (req) => JSON.stringify(req.body));
 app.use((0, morgan_1.default)(':method :url :status :res[content-length] - :response-time ms :body'));
@@ -84,7 +87,7 @@ app.post('/api/persons', (req, res) => {
     persons = persons.concat(person);
     res.json(person);
 });
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log('Server listening on port', PORT);
 });
